@@ -62,6 +62,4 @@ In the ThousandEye platform there are different types of agents which we can run
 
 You can decide if any of the agents outlined above may suit your environment better, it might be possible you to to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience.
 
-### Visulising test data in Grafana
-
 ### Appendix - Endpoint agent monitoring
