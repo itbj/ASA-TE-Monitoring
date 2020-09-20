@@ -42,6 +42,8 @@ When you're done, select "Create New Test" and it should be created within a few
 
 Congratulations, you've just created your first test in ThousandEyes
 
+![](./images/run-test-cont.gif)
+
 ### Disabling SSL validation 
 
 In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this I can disable SSL validation under the advanced settings by unchecking "Verify SSL certificate"
