@@ -12,7 +12,7 @@ The products and techniques used in this guide are suitable and avialable in a w
 
 Fortunately, as it stands you can register for a 15 day trial of ThousandEyes if you'd like to get started. To do this go to the [ThousandEyes site](https://www.thousandeyes.com) and click on the "request free trial button". Once you register and provide the required details you should then be taken to the ThousandEyes dashboard.
 
-### Prerequsite #2 - An ASA
+### Prerequsite #2 - An ASA with remote access configured
 
 Of course, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which may help you get up and running if you aren't already:
 
@@ -61,3 +61,7 @@ In the ThousandEye platform there are different types of agents which we can run
 * Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations. The drawback being is you have to manage the install of the agents to user machines, which in large environments can be tricky.
 
 You can decide if any of the agents outlined above may suit your environment better, it might be possible you to to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience.
+
+### Visulising test data in Grafana
+
+### Appendix - Endpoint agent monitoring
