@@ -16,13 +16,13 @@ Fortunately, as it stands you can register for a 15 day trial of ThousandEyes if
 
 Of course, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which may help you get up and running if you aren't already:
 
-* 1 
-* 2 
-* 3
+* ASA 9.0 Configuration guide - https://www.cisco.com/c/en/us/td/docs/security/asa/asa90/configuration/guide/asa_90_cli_config/vpn_remote_access.html
+* Step-by-step guide on configuring Remote access VPN on ASA - https://networklessons.com/cisco/asa-firewall/cisco-asa-remote-access-vpn
+* An Ansible playbook built to automate ASA remote access deployment - https://github.com/sttrayno/ASAonAWS-Ansible-Deployment
 
 ### Building a ThousandEyes test
 
-The first thing we have to do in ThousandEyes is to create a test, to do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
+The first thing we have to do in ThousandEyes is to create a test to look to monitor our ASA device, to do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
 
 Give your test a name and where it asks for a URL specify the IP address of your ASA (This can be a FQDN or an IP address, if you provide a FQDN an extra level of DNS testing data will be provided)
 
