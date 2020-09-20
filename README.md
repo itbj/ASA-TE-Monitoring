@@ -62,4 +62,10 @@ In the ThousandEye platform there are different types of agents which we can run
 
 You can decide if any of the agents outlined above may suit your environment better, it might be possible you to to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience.
 
+### Visualisation and Alerts
+
+### Advanced visualisations with Grafana
+
+From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
+
 ### Appendix - Endpoint agent monitoring
