@@ -1,6 +1,6 @@
 # ASA VPN monitoring with ThousandEyes
 
-In 2020 providing remote access to users and building out a good VPN infrastructure has become absolutely mission critical.
+In 2020 providing remote access to users and building out a good VPN infrastructure has become absolutely mission critical. The challenge for IT organisations is how do they look to provide better monitoring and assurance of these infrastructures, particuarly when users are accessing from networks and devices which the organisation may not actually own or be able to manage.
 
 In order to help with this, we've [previously looked at VPN utilisation monitoring](https://github.com/sttrayno/ASA-Telemetry-Guide) using off the shelf tools such as pyATS and TIG stack. This was extremely popular at the time so I thought it might be time to build on this a little more.
 
