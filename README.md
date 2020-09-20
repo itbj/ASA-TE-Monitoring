@@ -60,11 +60,17 @@ In the ThousandEye platform there are different types of agents which we can run
 
 * Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations. The drawback being is you have to manage the install of the agents to user machines, which in large environments can be tricky.
 
-You can decide if any of the agents outlined above may suit your environment better, it might be possible you to to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience.
+You can decide if any of the agents outlined above may suit your environment better, it might be possible for you to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience. However this will add a level of complexity so it's a trade-off
 
 ### Visualisation and Alerts
 
+Within the stock ThousandEyes platform there is the dashboard screen, from here you can build custom views to check on the status of your tests and build out charts to allow you to track the key metrics you need. Such as the examples below: 
+
+Within ThousandEyes when you run your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact needs.
+
 ### Advanced visualisations with Grafana
+
+In the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations.
 
 From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
 
