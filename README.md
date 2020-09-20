@@ -46,6 +46,8 @@ Congratulations, you've just created your first test in ThousandEyes
 
 In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this I can disable SSL validation under the advanced settings by unchecking "Verify SSL certificate"
 
+![](./images/disable-ssl.gif)
+
 ### Types of test
 
 
