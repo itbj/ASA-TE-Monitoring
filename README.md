@@ -52,4 +52,11 @@ In this example, as I don't have a valid certificate on my ASA. Therefore when m
 
 ### Types of test
 
+In the ThousandEye platform
+
+Cloud Agents - These are the agents in which we ran our test in the first section of the guide, cloud agents are managed and maintained by ThousandEyes across nearly [200 cities globally](https://www.thousandeyes.com/product/cloud-agents) which allow you to test availablility and performance from multiple different geos, clouds and ISP's. In the free trial there are 29 available.
+
+Enterprise Agents - These are agents you deploy on your own network, this is by far the most flexible method of deployment and there's many options for installing the agent including OVA, Docker container and installable package.
+
+Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations.
 
