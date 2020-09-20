@@ -52,11 +52,12 @@ In this example, as I don't have a valid certificate on my ASA. Therefore when m
 
 ### Types of test
 
-In the ThousandEye platform
+In the ThousandEye platform there are different types of agents which we can run tests on, each of these have different advantages and considerations which will dictate what you use. A quick explanation of the most popular tests:
 
-Cloud Agents - These are the agents in which we ran our test in the first section of the guide, cloud agents are managed and maintained by ThousandEyes across nearly [200 cities globally](https://www.thousandeyes.com/product/cloud-agents) which allow you to test availablility and performance from multiple different geos, clouds and ISP's. In the free trial there are 29 available.
+Cloud Agents - These are the agents in which we ran our test in the first section of the guide, cloud agents are managed and maintained by ThousandEyes across nearly [200 cities globally](https://www.thousandeyes.com/product/cloud-agents) which allow you to test availablility and performance from multiple different geos, clouds and ISP's. In the free trial there are 29 different agents available to run tests on
 
-Enterprise Agents - These are agents you deploy on your own network, this is by far the most flexible method of deployment and there's many options for installing the agent including OVA, Docker container and installable package.
+Enterprise Agents - These are agents you deploy on your own infrastructure, this is by far the most flexible method of deployment and there's many options for installing the agent including OVA, Docker container and installable package. You will have to manage these agents yourself as an adminstrator however they give great flexibility in terms of being able to run pretty much anywhere you require.
 
-Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations.
+Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations. The drawback being is you have to manage the install of the agents to user machines, which in large environments can be tricky.
 
+You can decide if any of the agents outlined above may suit your environment better, it might be possible you to to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience.
