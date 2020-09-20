@@ -14,14 +14,33 @@ Fortunately, as it stands you can register for a 15 day trial of ThousandEyes if
 
 ### Prerequsite #2 - An ASA
 
-Ofcourse, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which ma
+Ofcourse, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which may help you get up and running if you aren't already:
+
+* 1 
+* 2 
+* 3
 
 ### Building a ThousandEyes test
 
-#### Disable SSL validation (optional)
+The first thing we have to do in ThousandEyes is to create a test, to do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
 
+Give your test a name and where it asks for a URL specify the IP address of your ASA (This can be a FQDN or an IP address, if you provide a FQDN an extra level of DNS testing data will be provided)
+
+You'll see an option for the agents you wish to run this test on, select a few agents here, I'd recommend choosing one from each region
+
+Note: At the time of writing within the TE trial period, you can only run a single test on each Agent.
+
+You will also see an option to select the alerts you recieve, for now I'd leave this at the default
+
+```
 In this example, as I don't have a valid certificate on my ASA. I'm going to choose
+```
+
+When you're done, select "Create New Test" and it should be created within a few seconds, select on the test you've just created and you should see a button for "Run Once" select that and give TE a few minutes to run its tests. It should return an example view as we've got below.
+
+Congratulations, you've just created your first test in ThousandEyes
 
 ### Types of test
 
+Now you've build that first
 
