@@ -80,7 +80,7 @@ From here you could now look to follow our [previous](https://github.com/sttrayn
 
 ### Appendix - Endpoint agent monitoring
 
-As mentioned earlier, we can make use of endpoint agents within our monitoring to give a better view of user experience
+As mentioned earlier, we can make use of endpoint agents within our monitoring to give a better view of user experience. This short appendix will walk through the process of creating similar tests on our ASA's but with an endpoint agent.
 
 #### Installing endpoint agent
 
