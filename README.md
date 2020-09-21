@@ -68,9 +68,9 @@ Within the stock ThousandEyes platform there is the dashboard screen, from here 
 
 ![](./images/dashboards.gif)
 
-There are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisations can be an issue. We'll go onto address this in the next section.
+There are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisation and data storage can be an issue. We'll go onto address this in the next section.
 
-Within ThousandEyes when you run your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact needs. 
+Within ThousandEyes when you configure your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact requirements 
 
 ### Advanced visualisations with Grafana
 
@@ -80,4 +80,10 @@ From here you could now look to follow our [previous](https://github.com/sttrayn
 
 ### Appendix - Endpoint agent monitoring
 
-As mentioned earlier,
+As mentioned earlier, we can make use of endpoint agents within our monitoring to give a better view of user experience
+
+#### Installing endpoint agent
+
+#### Configuring endpoint test
+
+
