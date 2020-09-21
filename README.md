@@ -66,6 +66,8 @@ You can decide if any of the agents outlined above may suit your environment bet
 
 Within the stock ThousandEyes platform there is the dashboard screen, from here you can build custom views to check on the status of your tests and build out charts to allow you to track the key metrics you need. Such as the examples below: 
 
+![](./images/dashboards.gif)
+
 There are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisations can be an issue. We'll go onto address this in the next section.
 
 Within ThousandEyes when you run your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact needs. 
