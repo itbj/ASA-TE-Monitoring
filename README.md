@@ -68,9 +68,9 @@ Within the stock ThousandEyes platform there is the dashboard screen, from here 
 
 ![](./images/dashboards.gif)
 
-There are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisation and data storage can be an issue. We'll go onto address this in the next section.
+AS you can see there are a selection of graphs and different visualisation methods for building out simple dashboards for multiple different scenarios. However there are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisation and data storage can be an issue. We'll go onto address this in the next section.
 
-Within ThousandEyes when you configure your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact requirements 
+Within ThousandEyes when you configure your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact requirements.
 
 ### Advanced visualisations with Grafana
 
@@ -84,6 +84,12 @@ As mentioned earlier, we can make use of endpoint agents within our monitoring t
 
 #### Installing endpoint agent
 
+You can download the ThousandEyes agent for testing from "Endpoint Agents" > "Agent Settings" and by selecting "Add new endpoint agent". There are two types Endpoint Agent for Deployment within your organization to collect metrics and Endpoint Agent Pulse which can be deployed outside your organization (external partner or customers). Once the agent has been installed after a few minutes it should show up in the agents panel of "Agent Settings"
+
+For full documentation on installing endpoint agents please refer to the ThousandEyes [documentation](https://docs.thousandeyes.com/product-documentation/endpoint-agent/installing-the-endpoint-agent-for-windows)
+
 #### Configuring endpoint test
+
+Now we have an agent installed on a local machine, it's time to configure a test which will run periodically on these endpoints
 
 
