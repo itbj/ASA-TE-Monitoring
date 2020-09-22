@@ -8,6 +8,8 @@ In this guide, we're going to attempt to expand on this more, by looking to enco
 
 The products and techniques used in this guide are suitable and avialable in a way that can be used for companies of all sizes aslong as you have an ASA and ThousandEyes. It should also be said that this should be possible with other remote access VPN solutions also as long as ThousandEyes has support to build a test for it (HTTP in this case) you shouldn't have too much of an issue using the monitoring techniques discussed in this guide.
 
+### Setting up a ThousandEyes test
+
 ### Prerequsite #1 - ThousandEyes account
 
 Fortunately, as it stands you can register for a 15 day trial of ThousandEyes if you'd like to get started. To do this go to the [ThousandEyes site](https://www.thousandeyes.com) and click on the "request free trial button". Once you register and provide the required details you should then be taken to the ThousandEyes dashboard.
@@ -72,7 +74,7 @@ AS you can see there are a selection of graphs and different visualisation metho
 
 Within ThousandEyes when you configure your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact requirements.
 
-### Advanced visualisations with Grafana
+## Advanced visualisations with Grafana
 
 If you're set up with some basic visualisations and alerts from the last step and you're happy you can probably stop reading now. However in the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process. However to get our data into a stack such as TIG we'll need to start digging into the API.
 
