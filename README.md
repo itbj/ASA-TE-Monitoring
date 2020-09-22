@@ -2,9 +2,11 @@
 
 In 2020 providing remote access to users and building out a solid VPN infrastructure has become absolutely mission critical. The challenge for IT organisations is how do they look to provide better monitoring and assurance of these infrastructures, particuarly when users are accessing from networks and devices which the organisation may not actually own or be able to manage.
 
-In order to help with this, we've [previously looked at VPN utilisation monitoring](https://github.com/sttrayno/ASA-Telemetry-Guide) using off the shelf tools such as pyATS and the TIG stack. This was popular at the time so I thought it might be time to build on this a little more.
+In order to help with this, we've [previously looked at VPN utilisation monitoring](https://github.com/sttrayno/ASA-Telemetry-Guide) using off the shelf tools such as pyATS and the TIG stack to monitor the current state of the actual ASA and it's current metrics on VPN utilisation. This was popular at the time so I thought it might be time to build on this a little more from a different perspective
 
-In this guide, we're going to attempt to expand on this more, by looking to encorporate the ThousandEyes platform in order to monitor the availability of ASA's further for checking access of other metrics such as availability and packet loss to the ASA over the internet. For those who aren't familiar with ThousandEyes, ThousandEyes was aquired by Cisco in August 2020 - it specialises in monitoring the avialability and performance across networks which you don't own or manage, such as public clouds or the internet. ThousandEyes is an extremely powerful platform for being able to not only understand when faults are happening but also pinpoint exactly where in the network and what's going wrong. Take for example an outage in a specific ISP or a network issue in a specific region within the public cloud, it's these exact issues which ThousandEyes looks to be able to provide more situational awareness for. As many organisations are looking to deploy ASA's for VPN access that are accessible for employees at home over the internet, ThousandEyes will compliment our existing monitoring well from an outside in point of view.
+In this guide, we're going to attempt to expand on this topic of ASA monitoring, by looking to encorporate the ThousandEyes platform in order to monitor the availability of ASA's further for checking access of other metrics such as availability and packet loss to the ASA over the internet. For those who aren't familiar with ThousandEyes, ThousandEyes was aquired by Cisco in August 2020 - it specialises in monitoring the avialability and performance across networks which you don't own or manage, such as public clouds or the internet. ThousandEyes is an extremely powerful platform for being able to not only understand when faults are happening but also pinpoint exactly where in the network and what's going wrong. Take for example an outage in a specific ISP or a network issue in a specific region within the public cloud, it's these exact issues which ThousandEyes looks to be able to provide more situational awareness for. As many organisations are looking to deploy ASA's for VPN access that are accessible for employees at home over the internet, ThousandEyes will compliment our existing monitoring well from an outside in point of view.
+
+Imagine a scenario where a user calls into the helpdesk and complaining of not being able to access a VPN, dashboards and tools such as this will allow you to quickly get a view on if this is an isolated user issue or if theres something wider on the internet which is impacting connectivity.
 
 Please note, the products and techniques used in this guide are suitable and avialable in a way that can be used for companies of all sizes aslong as you have an ASA and ThousandEyes. It should also be said that this should be possible with other remote access VPN solutions also as long as ThousandEyes has support to build a test for it (HTTP in this case) you shouldn't have too much of an issue using the monitoring techniques discussed in this guide.
 
@@ -22,9 +24,11 @@ Ofcourse, as we are monitoring an ASA we'll need one of these configured and rea
 * Step-by-step guide on configuring Remote access VPN on ASA - https://networklessons.com/cisco/asa-firewall/cisco-asa-remote-access-vpn
 * An Ansible playbook built to automate ASA remote access deployment - https://github.com/sttrayno/ASAonAWS-Ansible-Deployment
 
+Your ASA will need to be accessible by the internet for this guide, in this scenario I'm going to track reachability on port 443.
+
 ### Building a ThousandEyes test
 
-The first thing we have to do in ThousandEyes is to create a test to look to monitor our ASA device, when you login to ThousandEyes you should be directed to the main dashboard, from here you can configure your tests you wish to run. To do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
+The first thing we have to do in ThousandEyes is to create a test to run and monitor our ASA device. When you login to ThousandEyes you should be directed to the main dashboard, From here you can configure your tests you wish to run. To do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
 
 Give your test a name and where it asks for a URL specify the internet accessible IP address of your ASA (This can be a FQDN or an IP address, if you provide a FQDN an extra level of DNS testing data will be provided). 
 
@@ -34,7 +38,7 @@ You'll see an option for the agents you wish to run this test on, select a few a
 
 Note: At the time of writing within the TE trial period, there are 29 agents available you can only run a single test on each Agent. Pick a few so you get a nice wide dataset.
 
-You will also see an option to select the alerts you recieve, for now I'd leave this at the default
+You will also see an option to select the alerts you recieve, for now I'd leave this at the default and check all of them.
 
 ![](./images/select-agents.gif)
 
@@ -48,7 +52,7 @@ Congratulations, you've just created your first test in ThousandEyes, take some 
 
 ### Disabling SSL validation (Optional)
 
-In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this I can disable SSL validation under the "advanced settings" by unchecking "Verify SSL certificate"
+In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this error I can disable SSL validation under the "advanced settings" by unchecking "Verify SSL certificate".
 
 ![](./images/disable-ssl.gif)
 
@@ -56,7 +60,7 @@ In this example, as I don't have a valid certificate on my ASA. Therefore when m
 
 In the ThousandEye platform there are different types of agents which we can run tests on, each of these have different advantages and considerations which will dictate what you use. A quick explanation of the most popular tests:
 
-* Cloud Agents - These are the agents in which we ran our test in the first section of the guide, cloud agents are managed and maintained by ThousandEyes across nearly [200 cities globally](https://www.thousandeyes.com/product/cloud-agents) which allow you to test availablility and performance from multiple different geos, clouds and ISP's. In the free trial there are 29 different agents available to run tests on
+* Cloud Agents - These are the agents in which we ran our test in the first section of the guide, cloud agents are managed and maintained by ThousandEyes which allow you to test availablility and performance from multiple different geos, clouds and ISP's. In the free trial there are 29 different agents available to run tests on. In the full paid version there are nearly [200 cities globally](https://www.thousandeyes.com/product/cloud-agents).
 
 * Enterprise Agents - These are agents you deploy on your own infrastructure, this is by far the most flexible method of deployment and there's many options for installing the agent including OVA, Docker container and installable package. You will have to manage these agents yourself as an adminstrator however they give great flexibility in terms of being able to run pretty much anywhere you require.
 
@@ -64,7 +68,7 @@ In the ThousandEye platform there are different types of agents which we can run
 
 You can decide if any of the agents outlined above may suit your environment better, it might be possible for you to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience. However this will add a level of complexity so it's a trade-off.
 
-It is important to note that our example is using agents from all round the world, now in a proper production  scenario this probably isn't something you'd do as you'd likely have VPN gateways all over the world to accomodate your users. As I'm working with just one ASA, situated in AWS us-east-1 this isn't going to be necessarily a representative deployment but we are limited by scale and the available sensors in the ThousandEyes trial account, in a proper deployment you'd have a lot more options to deploy and use agents more representative of your scenario or agents on the endpoint itself to give a view of situations such as poor employee connectivity or ISP outages.
+It is important to note that our example is using agents from all round the world, now in a proper production scenario this probably isn't something you'd do as you'd likely have VPN gateways all over the world to accomodate your users. As I'm working with just one ASA, situated in AWS us-east-1 this isn't going to be necessarily a representative deployment but we are limited by scale and the available sensors in the ThousandEyes trial account, in a proper deployment you'd have a lot more options to deploy and use agents more representative of your scenario or agents on the endpoint itself to give a view of situations such as poor employee connectivity or ISP outages.
 
 ### Visualisation and Alerts
 
@@ -226,18 +230,3 @@ To do this:
 ![](./images/dashboard-import.gif)
 
 Congratulations, you've now went through a worked example to create some visualisations from the data ThousandEyes provides in Grafana. From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
-
-### Appendix - Endpoint agent monitoring
-
-As mentioned earlier, we can make use of endpoint agents within our monitoring to give a better view of user experience. This short appendix will walk through the process of creating similar tests on our ASA's but with an endpoint agent.
-
-#### Installing endpoint agent
-
-You can download the ThousandEyes agent for testing from "Endpoint Agents" > "Agent Settings" and by selecting "Add new endpoint agent". There are two types Endpoint Agent for Deployment within your organization to collect metrics and Endpoint Agent Pulse which can be deployed outside your organization (external partner or customers). Once the agent has been installed after a few minutes it should show up in the agents panel of "Agent Settings"
-
-For full documentation on installing endpoint agents please refer to the ThousandEyes [documentation](https://docs.thousandeyes.com/product-documentation/endpoint-agent/installing-the-endpoint-agent-for-windows)
-
-#### Configuring endpoint test
-
-Now we have an agent installed on a local machine, it's time to configure a test which will run periodically on these endpoints
-
