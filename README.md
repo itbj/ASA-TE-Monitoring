@@ -74,7 +74,9 @@ Within ThousandEyes when you configure your tests you can also set the alerts th
 
 ### Advanced visualisations with Grafana
 
-In the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process.
+If you're set up with some basic visualisations and alerts from the last step and you're happy you can probably stop reading now. However in the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process. However to get our data into a stack such as TIG we'll need to start digging into the API.
+
+In this example we're going to take the results
 
 From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
 
