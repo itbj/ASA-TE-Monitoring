@@ -86,6 +86,8 @@ Within ThousandEyes when you configure your tests you can also set the alerts th
 
 If you're set up with some basic visualisations and alerts from the last step and you're happy you can probably stop reading now and go on your merry away. However in the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process. However to get our data into a stack such as TIG we'll need to start digging into the API.
 
+For this part of the guide you probably need to be comfortable with using REST API's and parsing JSON data structures, however we will provide worked examples.
+
 #### Step 1 - Installing Docker
 
 First off we'll need an environment with the TIG stack installed that we can use, for this guide I'll use a Docker container to automate much of this process. If you already have docker installed you can proceed to Step 2 and start to pull down the containers required. If you do not have docker installed you can consult the docker documentation here
@@ -141,7 +143,7 @@ pip install -U pip
 pip install requests
 ```
 
-In this example we're going to take the results from the http-server API call. You can customise this to visualise whatever data you would like to visualise within Grafana, for this you'll need to explore the API to see what you can sucessfully query you can find the documentation [here](https://developer.thousandeyes.com/v6/test_data/) Once you get the response its then a matter of parsing it as required and printing the data out to the console. Telegraf will then do the rest in the following steps. You can see an example script below and some additional scripts in the 'code' folder of this repo.
+In this example we're going to take the results from the web http-server test request API call. You can customise this to visualise whatever data you would like to visualise within Grafana, for this you'll need to explore the API to see what you can sucessfully query you can find the documentation [here](https://developer.thousandeyes.com/v6/test_data/) Once you get the response its then a matter of parsing it as required and printing the data out to the console. Telegraf will then do the rest in the following steps. You can see an example script below and some additional scripts in the 'code' folder of this repo.
 
 Please note: you will have to add your own TEST_ID and Auth token to this script for it to work. You can find your auth bearer token from the "Account Settings > Users and Roles" page under the “Profile” tab, in the “User API Tokens” section. To get your test_ID you can find this in the URL under views. For example the `https://app.thousandeyes.com/view/tests/?roundId=00000001&metric=availability&scenarioId=httpServer&testId=1694485` would have a test_ID of 1694485.
 
