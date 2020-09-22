@@ -76,13 +76,13 @@ Within ThousandEyes when you configure your tests you can also set the alerts th
 
 If you're set up with some basic visualisations and alerts from the last step and you're happy you can probably stop reading now. However in the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process. However to get our data into a stack such as TIG we'll need to start digging into the API.
 
-## Step 1 - Installing Docker
+#### Step 1 - Installing Docker
 
 First off we'll need an environment with the TIG stack installed that we can use, for this guide I'll use a Docker container to automate much of this process. If you already have docker installed you can proceed to Step 2 and start to pull down the containers required. If you do not have docker installed you can consult the docker documentation here
 
 Alternatively you could install the TIG stack on your own system, they are numerous guides on how to do this online. For completeness we'll walk through all the steps here.
 
-## Step 2 - Setup our TIG stack
+#### Step 2 - Setup our TIG stack
 
 Thankfully, Jeremy Cohoe has created a fantastic docker container with all the needed components preinstalled. You can pull the container from the Docker hub with the following shell command.
 
