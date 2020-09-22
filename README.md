@@ -153,7 +153,6 @@ headers = {
 
 r = requests.request("GET", te_endpoint, headers=headers, data = payload)
 
-
 r = json.loads(str(r.text))
 
 x = 0
@@ -172,6 +171,12 @@ while x < len(r['web']['httpServer']):
 print(json.dumps(testData))
 ```
 
+Once you've configured your environment all that is left to do is now test to see if things are working. Try running the following command from the shell which will test using our collection script.
+
+/opt/telegraf/env3/bin/python /opt/telegraf/ASA-Telemetry-Guide/telegraf/scripts/asascript.py
+
+![](./images/run-script.gif)
+
 #### Step 3 - Configure Telegraf and Build Dashboards
 
 Now that we can get data from the ThousandEyes, let's get our dashboard built.
@@ -181,6 +186,8 @@ First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist crea
 ```bash
 cp /opt/telegraf/ASA-Telemetry-Guide/telegraf/custom.conf /etc/telegraf/telegraf.d/custom.conf
 ```
+
+![](./images/copy-config.gif)
 
 If you `cat custom.config` you will see the contents, all this does is take our ThousandEyes script from the last example and runs this every minute to collect the metrics from our tests by using our example Python script. You can run multiple of these custom.config files, just put them in the telegraf.d directory and give them another name that makes them easy to identify. You may have multiple for different tests or multiple ASA's
 
@@ -195,9 +202,7 @@ If you `cat custom.config` you will see the contents, all this does is take our 
 
 When telegraf starts this will invoke our python script we tested in the last step and send this output to our InfluxDB. You should have tested that the script will run in your environment before getting to this stage to do this please run the command `/opt/telegraf/env3/bin/python /opt/telegraf/ASA-TE-Monitoring/code/te.py` in your terminal, if it errors out go back to step 2 before proceeding.
 
-All that's left to do now is start the telegraf service, or if it's already running stop and start again. This can be done on an Ubuntu system with the command `service telegraf stop/start` like the graphic below.
-
-![](./images/telegraf-config.gif)
+All that's left to do now is start the telegraf service, or if it's already running stop and start again. This can be done on an Ubuntu system with the command `service telegraf stop/start` like the graphic above.
 
 By now we should have some data in our InfluxDB to display.
 
