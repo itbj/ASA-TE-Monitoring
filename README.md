@@ -133,7 +133,7 @@ pip install -U pip
 pip install requests
 ```
 
-In this example we're going to take the results
+In this example we're going to take the results from the http-server API call
 
 ```python
 import requests
@@ -170,15 +170,46 @@ while x < len(r['web']['httpServer']):
 print(json.dumps(testData))
 ```
 
+## Step 3 - Configure Telegraf and Build Dashboards
+
+Now that we can get data from the ASA, let's get our dashboard built.
+
+First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist create it, and copy the `custom.conf` file in the telegraf folder over to `/etc/telegraf/telegraf.d/custom.conf`
+
+```bash
+cp /opt/telegraf/ASA-Telemetry-Guide/telegraf/custom.conf /etc/telegraf/telegraf.d/custom.conf
+```
+
+If you `cat custom.config` you will see the contents
+
 ```
 [[inputs.exec]]
- command = "/opt/telegraf/env3/bin/python /opt/telegraf/code/te.py"
+ command = "/opt/telegraf/env3/bin/python /opt/telegraf/ASA-TE-Monitoring/code/te.py"
  data_format = "json"
  name_suffix = "TE_test_data"
  interval = "1m"
               
 ```
-From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
+
+When telegraf starts this will invoke our python script we tested in the last step and send this output to our InfluxDB. You should have tested that the script will run in your environment before getting to this stage, if not go back to step 2 before doing this.
+
+All that's left to do now is start the telegraf service, or if it's already running stop and start again. This can be done on an Ubuntu system with the command `service telegraf stop/start` like the graphic below.
+
+![](./images/telegraf-config.gif)
+
+By now we should have some data in our InfluxDB to display.
+
+To configure our dashboards login to Grafana which should be already running on your system and login (if you're using the container above the username/password is admin/Cisco123).
+
+First thing you should do is configure a data source, you can do this by selecting:
+
+![](./images/configure-db.gif)
+
+Important: Make sure you name the database `InfluxDB-asa`, as the pre-configured dashboard we're about to use will reference this source name. Ensure the InfluxDB database that's being referenced is also telegraf as shown in the graphic below.
+
+Congratulations, you've now went through a worked example to create some visualisations from the data ThousandEyes provides in Grafana. From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
+
+For example
 
 ### Appendix - Endpoint agent monitoring
 
