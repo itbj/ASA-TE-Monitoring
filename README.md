@@ -133,7 +133,7 @@ pip install -U pip
 pip install requests
 ```
 
-In this example we're going to take the results from the http-server API call
+In this example we're going to take the results from the http-server API call.
 
 ```python
 import requests
@@ -170,9 +170,9 @@ while x < len(r['web']['httpServer']):
 print(json.dumps(testData))
 ```
 
-## Step 3 - Configure Telegraf and Build Dashboards
+#### Step 3 - Configure Telegraf and Build Dashboards
 
-Now that we can get data from the ASA, let's get our dashboard built.
+Now that we can get data from the ThousandEyes, let's get our dashboard built.
 
 First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist create it, and copy the `custom.conf` file in the telegraf folder over to `/etc/telegraf/telegraf.d/custom.conf`
 
@@ -180,7 +180,7 @@ First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist crea
 cp /opt/telegraf/ASA-Telemetry-Guide/telegraf/custom.conf /etc/telegraf/telegraf.d/custom.conf
 ```
 
-If you `cat custom.config` you will see the contents
+If you `cat custom.config` you will see the contents, all this does is take our ThousandEyes script from the last example and runs this every minute to collect the metrics from our tests by using our example Python script. You can run multiple of these custom.config files, just put them in the telegraf.d directory and give them another name that makes them easy to identify. You may have multiple for different tests or multiple ASA's
 
 ```
 [[inputs.exec]]
@@ -191,7 +191,7 @@ If you `cat custom.config` you will see the contents
               
 ```
 
-When telegraf starts this will invoke our python script we tested in the last step and send this output to our InfluxDB. You should have tested that the script will run in your environment before getting to this stage, if not go back to step 2 before doing this.
+When telegraf starts this will invoke our python script we tested in the last step and send this output to our InfluxDB. You should have tested that the script will run in your environment before getting to this stage to do this please run the command `/opt/telegraf/env3/bin/python /opt/telegraf/ASA-TE-Monitoring/code/te.py` in your terminal, if it errors out go back to step 2 before proceeding.
 
 All that's left to do now is start the telegraf service, or if it's already running stop and start again. This can be done on an Ubuntu system with the command `service telegraf stop/start` like the graphic below.
 
