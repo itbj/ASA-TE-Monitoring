@@ -62,7 +62,9 @@ In the ThousandEye platform there are different types of agents which we can run
 
 * Endpoint Agents - These are deployed on the end-users actual device, this can be installed on a browser (Edge, Chrome or Firefox) or on the OS (MacOS or Windows). These provide a major advantage of being able to track the users actual experiences, across multiple devices, ISPs and physical locations. The drawback being is you have to manage the install of the agents to user machines, which in large environments can be tricky.
 
-You can decide if any of the agents outlined above may suit your environment better, it might be possible for you to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience. However this will add a level of complexity so it's a trade-off
+You can decide if any of the agents outlined above may suit your environment better, it might be possible for you to distribute the endpoint agent to user machines which will provide a more respresentative view of user experience. However this will add a level of complexity so it's a trade-off.
+
+It is important to note that our example is using agents from all round the world, now in a proper production  scenario this probably isn't something you'd do as you'd likely have VPN gateways all over the world to accomodate your users. As I'm working with just one ASA, situated in AWS us-east-1 this isn't going to be necessarily a representative deployment but we are limited by scale and the available sensors in the ThousandEyes trial account, in a proper deployment you'd have a lot more options to deploy and use agents more representative of your scenario or agents on the endpoint itself to give a view of situations such as poor employee connectivity or ISP outages.
 
 ### Visualisation and Alerts
 
@@ -238,5 +240,4 @@ For full documentation on installing endpoint agents please refer to the Thousan
 #### Configuring endpoint test
 
 Now we have an agent installed on a local machine, it's time to configure a test which will run periodically on these endpoints
-
 
