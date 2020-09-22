@@ -172,14 +172,14 @@ print(json.dumps(testData))
 ```
 
 Once you've configured your environment all that is left to do is now test to see if things are working. Try running the following command from the shell which will test using our collection script.
-
+```
 /opt/telegraf/env3/bin/python /opt/telegraf/ASA-Telemetry-Guide/telegraf/scripts/asascript.py
-
+```
 ![](./images/run-script.gif)
 
 #### Step 3 - Configure Telegraf and Build Dashboards
 
-Now that we can get data from the ThousandEyes, let's get our dashboard built.
+Now that we can get data from the ThousandEyes, let's get the data into InfluxDB and start building some visuals.
 
 First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist create it, and copy the `custom.conf` file in the telegraf folder over to `/etc/telegraf/telegraf.d/custom.conf`
 
@@ -187,7 +187,7 @@ First off if the directory `/etc/telegraf/telegraf.d` doesn't already exist crea
 cp /opt/telegraf/ASA-Telemetry-Guide/telegraf/custom.conf /etc/telegraf/telegraf.d/custom.conf
 ```
 
-![](./images/copy-config.gif)
+![](./images/copy-conifg.gif)
 
 If you `cat custom.config` you will see the contents, all this does is take our ThousandEyes script from the last example and runs this every minute to collect the metrics from our tests by using our example Python script. You can run multiple of these custom.config files, just put them in the telegraf.d directory and give them another name that makes them easy to identify. You may have multiple for different tests or multiple ASA's
 
@@ -204,11 +204,9 @@ When telegraf starts this will invoke our python script we tested in the last st
 
 All that's left to do now is start the telegraf service, or if it's already running stop and start again. This can be done on an Ubuntu system with the command `service telegraf stop/start` like the graphic above.
 
-By now we should have some data in our InfluxDB to display.
+By now we should have some data in our InfluxDB to display. The next step from here is to login to Grafana and configure our dashboard to do this navigate to grafana on http://localhost:3000 and login (if you're using the container above the username/password is admin/Cisco123).
 
-To configure our dashboards login to Grafana which should be already running on your system and login (if you're using the container above the username/password is admin/Cisco123).
-
-First thing you should do is configure a data source, you can do this by selecting:
+First thing you should do is configure a data source, you can do this by looking for the gear icon on the left hand side selecting data sources and choose add data source, then select the InfluxDB icon, you will then be taken to a configuration screen Make sure you mirror the configurations below:
 
 ![](./images/configure-db.gif)
 
