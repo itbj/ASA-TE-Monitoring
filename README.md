@@ -4,19 +4,19 @@ In 2020 providing remote access to users and building out a solid VPN infrastruc
 
 In order to help with this, we've [previously looked at VPN utilisation monitoring](https://github.com/sttrayno/ASA-Telemetry-Guide) using off the shelf tools such as pyATS and the TIG stack. This was popular at the time so I thought it might be time to build on this a little more.
 
-In this guide, we're going to attempt to expand on this more, by looking to encorporate the ThousandEyes platform in order to monitor the availability of ASA's further for checking access of other metrics such as availability and packet loss to the ASA over the internet. For those who aren't familiar with ThousandEyes, ThousandEyes was aquired by Cisco in August 2020 - it specialises in monitoring the avialability and performance across networks which you don't own or manage, such as public clouds or the internet. ThousandEyes is an extremely powerful platform for being able to not only understand when faults are happening but also pinpoint exactly where in the network and what's going wrong. Take for example an outage in a specific ISP or a network issue in a specific region within the public cloud, it's these exact issues which ThousandEyes looks to be able to provide more situational awareness for.
+In this guide, we're going to attempt to expand on this more, by looking to encorporate the ThousandEyes platform in order to monitor the availability of ASA's further for checking access of other metrics such as availability and packet loss to the ASA over the internet. For those who aren't familiar with ThousandEyes, ThousandEyes was aquired by Cisco in August 2020 - it specialises in monitoring the avialability and performance across networks which you don't own or manage, such as public clouds or the internet. ThousandEyes is an extremely powerful platform for being able to not only understand when faults are happening but also pinpoint exactly where in the network and what's going wrong. Take for example an outage in a specific ISP or a network issue in a specific region within the public cloud, it's these exact issues which ThousandEyes looks to be able to provide more situational awareness for. As many organisations are looking to deploy ASA's for VPN access that are accessible for employees at home over the internet, ThousandEyes will compliment our existing monitoring well from an outside in point of view.
 
-The products and techniques used in this guide are suitable and avialable in a way that can be used for companies of all sizes aslong as you have an ASA and ThousandEyes. It should also be said that this should be possible with other remote access VPN solutions also as long as ThousandEyes has support to build a test for it (HTTP in this case) you shouldn't have too much of an issue using the monitoring techniques discussed in this guide.
+Please note, the products and techniques used in this guide are suitable and avialable in a way that can be used for companies of all sizes aslong as you have an ASA and ThousandEyes. It should also be said that this should be possible with other remote access VPN solutions also as long as ThousandEyes has support to build a test for it (HTTP in this case) you shouldn't have too much of an issue using the monitoring techniques discussed in this guide.
 
 ### Setting up a ThousandEyes test
 
 ### Prerequsite #1 - ThousandEyes account
 
-Fortunately, as it stands you can register for a 15 day trial of ThousandEyes if you'd like to get started. To do this go to the [ThousandEyes site](https://www.thousandeyes.com) and click on the "request free trial button". Once you register and provide the required details you should then be taken to the ThousandEyes dashboard.
+If you've got access to a ThousandEyes account great, you can skip this step. If you do not, fortunately as it stands you can register for a 15 day trial of ThousandEyes if you'd like to get started. To do this go to the [ThousandEyes site](https://www.thousandeyes.com) and click on the "request free trial button". Once you register and provide the required details you should then be taken to the ThousandEyes dashboard.
 
 ### Prerequsite #2 - An ASA with remote access configured
 
-Of course, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which may help you get up and running if you aren't already:
+Ofcourse, as we are monitoring an ASA we'll need one of these configured and ready to provide remote access, now I'm not going to go into this level of detail within this guide. However here's some resources which may help you get up and running if you aren't already:
 
 * ASA 9.0 Configuration guide - https://www.cisco.com/c/en/us/td/docs/security/asa/asa90/configuration/guide/asa_90_cli_config/vpn_remote_access.html
 * Step-by-step guide on configuring Remote access VPN on ASA - https://networklessons.com/cisco/asa-firewall/cisco-asa-remote-access-vpn
@@ -26,13 +26,13 @@ Of course, as we are monitoring an ASA we'll need one of these configured and re
 
 The first thing we have to do in ThousandEyes is to create a test to look to monitor our ASA device, when you login to ThousandEyes you should be directed to the main dashboard, from here you can configure your tests you wish to run. To do this navigate to "test settings" under "Cloud and Enterprise Agents" and select "Add New Test" a menu should then pop up allowing you to customise the different kind of test's you can run. For now we're going to stick with the default "HTTP Server"
 
-Give your test a name and where it asks for a URL specify the IP address of your ASA (This can be a FQDN or an IP address, if you provide a FQDN an extra level of DNS testing data will be provided).
+Give your test a name and where it asks for a URL specify the internet accessible IP address of your ASA (This can be a FQDN or an IP address, if you provide a FQDN an extra level of DNS testing data will be provided). 
 
 ![](./images/create-test.gif)
 
 You'll see an option for the agents you wish to run this test on, select a few agents here, I'd recommend choosing one from each region. These agents are the default cloud agents which are available in the ThousandEyes trial, to learn more head down to the "Types of test" section to read into the different types of test that are available.
 
-Note: At the time of writing within the TE trial period, there are 29 agents available you can only run a single test on each Agent.
+Note: At the time of writing within the TE trial period, there are 29 agents available you can only run a single test on each Agent. Pick a few so you get a nice wide dataset.
 
 You will also see an option to select the alerts you recieve, for now I'd leave this at the default
 
@@ -48,7 +48,7 @@ Congratulations, you've just created your first test in ThousandEyes, take some 
 
 ### Disabling SSL validation (Optional)
 
-In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this I can disable SSL validation under the advanced settings by unchecking "Verify SSL certificate"
+In this example, as I don't have a valid certificate on my ASA. Therefore when my tests run I get an availability fail as the certifcate is invalid, to get round this I can disable SSL validation under the "advanced settings" by unchecking "Verify SSL certificate"
 
 ![](./images/disable-ssl.gif)
 
@@ -118,7 +118,7 @@ mkdir /opt/telegraf
 cd /opt/telegraf
 ```
 
-And clone this repo into the folder and create a python virtual environment. A Virtual Environment acts as an isolated working copy of Python which allows you to work on a specific project without worry of affecting other projects. It is strongly recommended that you use this as it creates an isolated environment for our exercise which has its own dependencies, regardless of what other packages are installed on the system.
+Next we're going clone this repo into the folder and create a python virtual environment. A Virtual Environment acts as an isolated working copy of Python which allows you to work on a specific project without worry of affecting other projects. It is strongly recommended that you use this as it creates an isolated environment for our exercise which has its own dependencies, regardless of what other packages are installed on the system.
 
 ```bash
 git clone https://github.com/sttrayno/ASA-TE-Monitoring.git
@@ -133,7 +133,9 @@ pip install -U pip
 pip install requests
 ```
 
-In this example we're going to take the results from the http-server API call.
+In this example we're going to take the results from the http-server API call. You can customise this to visualise whatever data you would like to visualise within Grafana, for this you'll need to explore the API to see what you can sucessfully query you can find the documentation [here](https://developer.thousandeyes.com/v6/test_data/) Once you get the response its then a matter of parsing it as required and printing the data out to the console. Telegraf will then do the rest in the following steps. You can see an example script below and some additional scripts in the 'code' folder of this repo.
+
+Please note: you will have to add your own TEST_ID and Auth token to this script for it to work. You can find your auth bearer token from the "Account Settings > Users and Roles" page under the “Profile” tab, in the “User API Tokens” section. To get your test_ID you can find this in the URL under views. For example the `https://app.thousandeyes.com/view/tests/?roundId=00000001&metric=availability&scenarioId=httpServer&testId=1694485` would have a test_ID of 1694485.
 
 ```python
 import requests
