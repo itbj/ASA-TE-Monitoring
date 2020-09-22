@@ -143,9 +143,9 @@ pip install -U pip
 pip install requests
 ```
 
-In this example we're going to take the results from the web http-server test request API call. You can customise this to visualise whatever data you would like to visualise within Grafana, for this you'll need to explore the API to see what you can sucessfully query you can find the documentation [here](https://developer.thousandeyes.com/v6/test_data/) Once you get the response its then a matter of parsing it as required and printing the data out to the console. Telegraf will then do the rest in the following steps. You can see an example script below and some additional scripts in the 'code' folder of this repo.
+In this example we're going to take the results from the web http-server test request API call which will return all the raw data from our test. You can customise this to visualise whatever data you would like to show within Grafana, for this you'll need to explore the ThousandEyes API to see what you can sucessfully query you can find the documentation [here](https://developer.thousandeyes.com/v6/test_data/). Once you get the response its then a matter of parsing it as required and printing the data out to the console. Telegraf will then do the rest in the following steps. You can see an example script below and some additional scripts in the 'code' folder of this repo.
 
-Please note: you will have to add your own TEST_ID and Auth token to this script for it to work. You can find your auth bearer token from the "Account Settings > Users and Roles" page under the “Profile” tab, in the “User API Tokens” section. To get your test_ID you can find this in the URL under views. For example the `https://app.thousandeyes.com/view/tests/?roundId=00000001&metric=availability&scenarioId=httpServer&testId=1694485` would have a test_ID of 1694485.
+Please note: you will have to add your own TEST_ID and Auth token to this script for it to work. You can find your auth bearer token from the "Account Settings > Users and Roles" page under the “Profile” tab, in the “User API Tokens” section. To get your test_ID you can find this in the URL under views for the test you want to query. For example the `https://app.thousandeyes.com/view/tests/?roundId=00000001&metric=availability&scenarioId=httpServer&testId=1694485` would have a test_ID of 1694485.
 
 ```python
 import requests
@@ -182,6 +182,7 @@ print(json.dumps(testData))
 ```
 
 Once you've configured your environment all that is left to do is now test to see if things are working. Try running the following command from the shell which will test using our collection script.
+
 ```
 /opt/telegraf/env3/bin/python /opt/telegraf/ASA-Telemetry-Guide/telegraf/scripts/asascript.py
 ```
