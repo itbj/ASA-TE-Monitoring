@@ -18,7 +18,7 @@ r = json.loads(str(r.text))
 
 x = 0
 
-tests = {}
+testData = {}
 
 while x < len(r['web']['httpServer']):
     agent = {}
