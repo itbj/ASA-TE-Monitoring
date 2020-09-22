@@ -1,14 +1,14 @@
 import requests
 import json
 
-test_id = "1694485"
+test_id = "<INSERT TEST_ID"
 
 te_endpoint = "https://api.thousandeyes.com/v6/web/http-server/" + test_id + ".json?headers=1&certificates=1"
 
 payload = {}
 
 headers = {
-  'Authorization': 'Bearer 2f422fee-d7f7-4835-8e85-396a00f68cf8'
+  'Authorization': 'Bearer <INSERT BEARER TOKEN>'
 }
 
 r = requests.request("GET", te_endpoint, headers=headers, data = payload)
