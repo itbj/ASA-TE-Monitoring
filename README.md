@@ -78,6 +78,50 @@ If you're set up with some basic visualisations and alerts from the last step an
 
 In this example we're going to take the results
 
+
+```python
+import requests
+import json
+
+test_id = "<INSERT YOUR TEST_ID HERE>"
+
+te_endpoint = "https://api.thousandeyes.com/v6/web/http-server/" + test_id + ".json?headers=1&certificates=1"
+
+payload = {}
+
+headers = {
+  'Authorization': 'Bearer <INSERT YOUR AUTH TOKEN HERE>'
+}
+
+r = requests.request("GET", te_endpoint, headers=headers, data = payload)
+
+
+r = json.loads(str(r.text))
+
+x = 0
+
+tests = {}
+
+while x < len(r['web']['httpServer']):
+    agent = {}
+    agentName = r['web']['httpServer'][x]['agentName']
+    agent['throughput'] = r['web']['httpServer'][x]['throughput']
+    agent['responseTime'] = r['web']['httpServer'][x]['responseTime']
+    agent['waitTime'] = r['web']['httpServer'][x]['waitTime']
+    x += 1
+    testData[agentName] = agent
+
+print(json.dumps(testData))
+```
+
+```
+[[inputs.exec]]
+ command = "/opt/telegraf/env3/bin/python /opt/telegraf/code/te.py"
+ data_format = "json"
+ name_suffix = "TE_test_data"
+ interval = "1m"
+              
+```
 From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
 
 ### Appendix - Endpoint agent monitoring
