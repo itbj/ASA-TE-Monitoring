@@ -70,7 +70,7 @@ Within the stock ThousandEyes platform there is the dashboard screen, from here 
 
 ![](./images/dashboards.gif)
 
-AS you can see there are a selection of graphs and different visualisation methods for building out simple dashboards for multiple different scenarios. However there are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisation and data storage can be an issue. We'll go onto address this in the next section.
+As you can see there are a selection of graphs and different visualisation methods for building out simple dashboards for multiple different scenarios. However there are some limitations with the visualisation as you'll typically have a limit of 30 days which means long term visualisation and data storage can be an issue. We'll go onto address this in the next section.
 
 Within ThousandEyes when you configure your tests you can also set the alerts that you wish to be notified when a test 'fails' by default this will send an email to you however you can tweak based on your exact requirements.
 
@@ -212,9 +212,18 @@ First thing you should do is configure a data source, you can do this by looking
 
 Important: Make sure you name the database `InfluxDB-asa`, as the pre-configured dashboard we're about to use will reference this source name. Ensure the InfluxDB database that's being referenced is also telegraf as shown in the graphic below.
 
-Congratulations, you've now went through a worked example to create some visualisations from the data ThousandEyes provides in Grafana. From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
+Once that runs and the connection test is successful it's then time to upload the .json file included in the Grafana directory of this repo, this should build the custom graphs we've built that will be populated with the data you are collecting from your own ASA environment.
 
-For example
+To do this:
+
+1. Hover over the grey '+' on the left hand taskbar and select Dashboard
+2. From there select New dashboard from the top of the screen
+3. Click Import dashboard from the next screen.
+4. You should then be prompted to upload your json file which can be found in this repo.
+
+![](./images/dashboard-import.gif)
+
+Congratulations, you've now went through a worked example to create some visualisations from the data ThousandEyes provides in Grafana. From here you could now look to follow our [previous](https://github.com/sttrayno/ASA-Telemetry-Guide) to look at getting device metrics in conjunction with these availability and performance numbers.
 
 ### Appendix - Endpoint agent monitoring
 
