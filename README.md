@@ -76,8 +76,62 @@ Within ThousandEyes when you configure your tests you can also set the alerts th
 
 If you're set up with some basic visualisations and alerts from the last step and you're happy you can probably stop reading now. However in the case that the stock alerting and visualisation in the ThousandEyes platform isn't enough for you or you need to have a more historical view of information over 30 days, we can also use open source tools such as Grafana, part of the TIG stack to build more custom visualisations. As the data in ThousandEyes is all available through a REST API it's a fairly straight forward process. However to get our data into a stack such as TIG we'll need to start digging into the API.
 
-In this example we're going to take the results
+## Step 1 - Installing Docker
 
+First off we'll need an environment with the TIG stack installed that we can use, for this guide I'll use a Docker container to automate much of this process. If you already have docker installed you can proceed to Step 2 and start to pull down the containers required. If you do not have docker installed you can consult the docker documentation here
+
+Alternatively you could install the TIG stack on your own system, they are numerous guides on how to do this online. For completeness we'll walk through all the steps here.
+
+## Step 2 - Setup our TIG stack
+
+Thankfully, Jeremy Cohoe has created a fantastic docker container with all the needed components preinstalled. You can pull the container from the Docker hub with the following shell command.
+
+```
+docker pull jeremycohoe/tig_mdt
+```
+
+Let that pull down the required image from Docker hub then run the following command to start the container.
+
+```
+docker run -ti -p 3000:3000 -p 57500:57500 jeremycohoe/tig_mdt
+```
+
+As this docker container wasn't fully built for what we're looking to do we need to do some further configuration. To do this, from your shell use the command `docker ps` to display your container id. Take the containerid value which should be 12 digit alphanumeric string and then use the command `docker exec -it <CONTAINER ID HERE> /bin/bash` . Once you do that you should have root prompt for your container.
+
+![](./images/docker-exec.gif)
+
+Now we're in use the following commands to install the necessary components and packages, run these one after the other
+
+```bash
+apt-get update && apt-get upgrade
+apt-get install python3
+apt-get install python3-pip && apt-get install python3-venv
+apt-get install git
+```
+
+Now create some directories we'll use later
+
+```bash
+mkdir /opt/telegraf
+cd /opt/telegraf
+```
+
+And clone this repo into the folder and create a python virtual environment. A Virtual Environment acts as an isolated working copy of Python which allows you to work on a specific project without worry of affecting other projects. It is strongly recommended that you use this as it creates an isolated environment for our exercise which has its own dependencies, regardless of what other packages are installed on the system.
+
+```bash
+git clone https://github.com/sttrayno/ASA-TE-Monitoring.git
+python3 -m venv env3
+source env3/bin/activate
+```
+
+Finally install the Python package requirements with the pip command.
+
+```bash
+pip install -U pip
+pip install requests
+```
+
+In this example we're going to take the results
 
 ```python
 import requests
