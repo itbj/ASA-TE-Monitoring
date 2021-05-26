@@ -12,5 +12,10 @@ Cisco’s Operations API Developer Portal
 https://developer.cisco.com/site/Operations-API-Portal/  
 Cisco Support APIs  
 https://developer.cisco.com/site/support-apis/  
+Welcome to the Cisco API Developer Portal  
+https://apidocs-prod.cisco.com/  
+Cisco’s Operations API Developer Portal  
+https://developer.cisco.com/site/Operations-API-Portal/  
+
 
 
